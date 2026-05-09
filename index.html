@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gap AI</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="shell">
+
+    <!-- ── Sidebar ── -->
+    <div id="sidebar" class="hidden">
+      <div class="sb-header">
+        <span class="sb-title">Conversations</span>
+        <button class="icon-btn" onclick="toggleSidebar()" title="Close">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <button class="new-chat-btn" onclick="newChat()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+        </svg>
+        New Chat
+      </button>
+      <div id="conversation-list"></div>
+      <div class="sb-footer">
+        <div class="sb-brand">Gap AI</div>
+        <div class="sb-sub">Made by Farhad</div>
+      </div>
+    </div>
+
+    <!-- ── Main ── -->
+    <div id="main">
+      <header>
+        <div style="display:flex;align-items:center;gap:10px">
+          <button class="icon-btn" onclick="toggleSidebar()" title="Menu">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <div class="logo">
+            <div class="logo-mark">G</div>
+            <span class="logo-name">Gap AI</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="newChat()" title="New chat">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+            </svg>
+          </button>
+          <button class="icon-btn" title="Settings">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- ── Chat ── -->
+      <div id="chat">
+        <div id="welcome">
+          <div class="welcome-icon">G</div>
+          <div class="welcome-title">Hi, I'm Gap AI</div>
+          <div class="welcome-sub">Ask me anything — I was made by Farhad to help you.</div>
+          <div class="suggestions">
+            <div class="suggestion-chip" onclick="useSuggestion(this)">Who is Cristiano Ronaldo?</div>
+            <div class="suggestion-chip" onclick="useSuggestion(this)">What time is it?</div>
+            <div class="suggestion-chip" onclick="useSuggestion(this)">Write me a poem</div>
+            <div class="suggestion-chip" onclick="useSuggestion(this)">Latest news today</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Input Zone ── -->
+      <div id="input-zone">
+        <div id="img-preview"></div>
+        <div id="input-bar">
+
+          <div id="plus-wrap">
+            <button id="add-image-btn" title="More options" onclick="toggleMenu(event)">+</button>
+            <div id="plus-menu">
+
+              <div class="menu-item" onclick="pickFiles()">
+                <span class="mi-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+                    viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg></span>
+                <span class="mi-label">Photos and files</span>
+              </div>
+              <div class="menu-divider"></div>
+              <div class="menu-item" onclick="menuAction('create-image')">
+                <span class="mi-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+                    viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="3" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                  </svg></span>
+                <span class="mi-label">Create image</span>
+              </div>
+              <div class="menu-item" onclick="menuAction('deep-research')">
+                <span class="mi-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+                    viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="11" y1="8" x2="11" y2="14" />
+                    <line x1="8" y1="11" x2="14" y2="11" />
+                  </svg></span>
+                <span class="mi-label">Deep Research</span>
+              </div>
+              <div class="menu-item" onclick="menuAction('web-search')">
+                <span class="mi-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+                    viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path
+                      d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                  </svg></span>
+                <span class="mi-label">Web search</span>
+              </div>
+              <div class="menu-item" onclick="menuAction('more')">
+                <span class="mi-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+                    viewBox="0 0 24 24">
+                    <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+                    <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                    <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+                  </svg></span>
+                <span class="mi-label">More</span><span class="mi-arrow">›</span>
+              </div>
+              <div class="menu-divider"></div>
+              <div class="menu-item" onclick="menuAction('projects')">
+                <span class="mi-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+                    viewBox="0 0 24 24">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                  </svg></span>
+                <span class="mi-label">Projects</span><span class="mi-arrow">›</span>
+              </div>
+
+            </div>
+          </div>
+
+          <input type="file" id="file-input" accept="image/*,*/*" multiple onchange="handleFiles(this.files)" />
+          <textarea id="prompt" rows="1" placeholder="Ask Gap AI anything…" oninput="autoResize(this); updateSendBtn()"
+            onkeydown="handleKey(event)"></textarea>
+          <button id="send-btn" title="Send" onclick="sendMessage()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <line x1="12" y1="19" x2="12" y2="5" />
+              <polyline points="5 12 12 5 19 12" />
+            </svg>
+          </button>
+        </div>
+        <p class="footer-hint">Gap AI · Made by Farhad · Can make mistakes, verify important info.</p>
+      </div>
+    </div><!-- /#main -->
+  </div><!-- /#shell -->
+
+  <script src="app.js"></script>
+</body>
+
+</html>
