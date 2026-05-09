@@ -20,7 +20,8 @@ let currentConvId        = null;
 let isBusy               = false;
 
 // ─── Backend URL (your Node.js server) ────────────────
-fetch("https://gap-ai.onrender.com/api/chat"
+const API_URL = "https://gap-ai.onrender.com/api/chat";
+
 
 // ══════════════════════════════════════════════════════
 //  TEXTAREA
