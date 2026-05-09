@@ -61,7 +61,7 @@ app.post("/api/chat", async (req, res) => {
       headers: {
         "Content-Type":  "application/json",
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY || process.env.ANTHROPIC_API_KEY}`,
-        "HTTP-Referer":  "http://localhost:3000",
+        "HTTP-Referer":  "https://gap-ai.onrender.com/api/chat1",
         "X-Title":       "Gap AI"
       },
       body: JSON.stringify(payload)
